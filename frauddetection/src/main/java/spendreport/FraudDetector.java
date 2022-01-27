@@ -63,7 +63,8 @@ public class FraudDetector extends KeyedProcessFunction<Long, Transaction, Alert
 				collector.collect(alert);
 			}
 
-			flagState.clear();
+			// Clean up our state
+			cleanUp(context);
 		}
 
 		if (transaction.getAmount() < SMALL_AMOUNT) {
