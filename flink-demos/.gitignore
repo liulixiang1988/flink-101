@@ -6,7 +6,6 @@
 # Compiled class file
 *.class
 
-target/
 # Log file
 *.log
 
@@ -42,9 +41,6 @@ replay_pid*
 
 # AWS User-specific
 .idea/**/aws.xml
-
-# Azure
-.idea/azure/
 
 # Generated files
 .idea/**/contentModel.xml
