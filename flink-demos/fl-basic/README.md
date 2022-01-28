@@ -1,6 +1,6 @@
 # Basic Flink Usage
 
-## StringWordCountJob
+## StreamWordCountJob
 
 To run the StringWordCountJob, you need to use `nc`(NetCat) to send data to the Flink cluster.
 
