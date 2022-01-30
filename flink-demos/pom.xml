@@ -17,7 +17,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <flink.version>1.14.2</flink.version>
+        <flink.version>1.14.3</flink.version>
         <target.java.version>1.8</target.java.version>
         <scala.binary.version>2.11</scala.binary.version>
         <maven.compiler.source>${target.java.version}</maven.compiler.source>
@@ -40,14 +40,11 @@
             </dependency>
             <!-- Add connector dependencies here. They must be in the default scope (compile). -->
 
-            <!-- Example:
-
             <dependency>
                 <groupId>org.apache.flink</groupId>
                 <artifactId>flink-connector-kafka_${scala.binary.version}</artifactId>
                 <version>${flink.version}</version>
             </dependency>
-            -->
 
             <!-- Add logging framework, to produce console output when running in the IDE. -->
             <!-- These dependencies are excluded from the application JAR by default. -->

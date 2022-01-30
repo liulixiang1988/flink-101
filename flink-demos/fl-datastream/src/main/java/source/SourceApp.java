@@ -1,5 +1,9 @@
 package source;
 
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.common.serialization.SimpleStringSchema;
+import org.apache.flink.connector.kafka.source.KafkaSource;
+import org.apache.flink.connector.kafka.source.enumerator.initializer.OffsetsInitializer;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -14,9 +18,24 @@ public class SourceApp {
         // env = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(Configuration.fromMap(null));
 
         // testParallel(env);
-        testCollectionSource(env);
+        // testCollectionSource(env);
+        testKafka(env);
 
         env.execute();
+    }
+
+    private static void testKafka(StreamExecutionEnvironment env) {
+        KafkaSource<String> source = KafkaSource.<String>builder()
+                .setBootstrapServers("localhost:9092")
+                .setTopics("flink")
+                .setGroupId("flink-consumer-group")
+                .setStartingOffsets(OffsetsInitializer.earliest())
+                .setValueOnlyDeserializer(new SimpleStringSchema())
+                .build();
+
+        DataStreamSource<String> kafka_source = env.fromSource(source, WatermarkStrategy.noWatermarks(), "Kafka Source");
+        System.out.println(kafka_source.getParallelism());
+        kafka_source.print();
     }
 
     private static void testParallel(StreamExecutionEnvironment env) {
