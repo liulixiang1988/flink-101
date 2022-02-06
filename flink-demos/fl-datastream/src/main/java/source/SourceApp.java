@@ -21,8 +21,15 @@ public class SourceApp {
         // testCollectionSource(env);
         // testKafka(env);
 
-        testCustomizeSource(env);
+        //testCustomizeSource(env);
+        testCustomizeSourceV2(env);
         env.execute();
+    }
+    private static void testCustomizeSourceV2(StreamExecutionEnvironment env) {
+
+        DataStreamSource<Access> accessDataStreamSource = env.addSource(new AccessSourceV2()).setParallelism(2);
+        System.out.println(accessDataStreamSource.getParallelism());
+        accessDataStreamSource.print();
     }
     private static void testCustomizeSource(StreamExecutionEnvironment env) {
 
